@@ -4,7 +4,9 @@ class TodolistsController < ApplicationController
   end
 
   def create
-    list = List.new(list_params)
+    list = List.new
+    list.score = Language.get_data(list_params[:body])  #この行を追加
+
     list.save
     tags = Vision.get_image_data(list.image)
     tags.each do |tag|
